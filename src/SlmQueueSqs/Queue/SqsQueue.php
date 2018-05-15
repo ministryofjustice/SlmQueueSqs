@@ -61,6 +61,7 @@ class SqsQueue extends AbstractQueue implements SqsQueueInterface
         $parameters = array(
             'QueueUrl'     => $this->queueOptions->getQueueUrl(),
             'MessageBody'  => $this->serializeJob($job),
+            'MessageGroupId'  => 'hard_coded',
             'DelaySeconds' => isset($options['delay_seconds']) ? $options['delay_seconds'] : null
         );
 
