@@ -65,6 +65,10 @@ class SqsQueue extends AbstractQueue implements SqsQueueInterface
             'DelaySeconds' => isset($options['delay_seconds']) ? $options['delay_seconds'] : null
         );
 
+        if (key_exists('MessageGroupId', $options)) {
+            $parameters['MessageGroupId'] = $options['MessageGroupId'];
+        }
+
         $result = $this->sqsClient->sendMessage(array_filter($parameters));
 
         $job->setMetadata(array(
