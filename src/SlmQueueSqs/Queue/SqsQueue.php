@@ -69,6 +69,9 @@ class SqsQueue extends AbstractQueue implements SqsQueueInterface
             $parameters['MessageGroupId'] = $options['MessageGroupId'];
         }
 
+        file_put_contents('php://stderr', '=== MessageGroupId ===');
+        file_put_contents('php://stderr', print_r($parameters, true));
+
         $result = $this->sqsClient->sendMessage(array_filter($parameters));
 
         $job->setMetadata(array(
