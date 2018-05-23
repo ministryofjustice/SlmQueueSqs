@@ -65,6 +65,8 @@ class SqsQueue extends AbstractQueue implements SqsQueueInterface
             'DelaySeconds' => isset($options['delay_seconds']) ? $options['delay_seconds'] : null
         );
 
+        file_put_contents(print_r($parameters, true), 'tmp/jobdump.log', FILE_APPEND);
+
         if (key_exists('MessageGroupId', $options)) {
             $parameters['MessageGroupId'] = $options['MessageGroupId'];
         }
